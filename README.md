@@ -24,3 +24,16 @@ Step 6: Exit loop once battle is over and explain the results.
 
 Step 7: Ask player if they would like to play again.
 
+
+
+UPDATE: 3/9/2023
+
+
+The stage of the game has been completed. I hae 3 playable character who can execute
+4 attacks. The gameplay is not interesting or entertaining yet so that will be the next main objective.
+In order to accomplish this goal, I will attempt to add additional effects and limitations 
+on the individual attack techniques that the monsters have. My idea for additional effects include things like healing,
+poison damage, disabling, and fortification. As for new limitations, I'm going to try to add
+limits to the number of times an attack can be used within one battle. This will have an inverse relationship with 
+the amount of damage that each attack does.
+

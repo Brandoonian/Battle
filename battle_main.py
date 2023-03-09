@@ -2,74 +2,132 @@ from time import sleep
 from random import choice
 from monster_one import Monster_ONE
 from monster_two import Monster_TWO
+from monster_three import Monster_THREE
+
+def simulate_battle():
+    battle_active = True
+    while battle_active == True:
+        print(user_monster.HP)
+        print(cpu_monster.HP)
+        print("\nChoose your attack by entering the corresponding number:")
+        user_attack = input(f"1.{user_monster.attack_1_name}           2.{user_monster.attack_2_name}"
+                            f"\n3.{user_monster.attack_3_name}             4.{user_monster.attack_4_name}: ")
+
+        if user_attack == '1':
+            print(f"\nYour monster used it's {user_monster.attack_1_name} attack!!")
+            cpu_monster.HP = user_monster.attack_1() + cpu_monster.HP
+
+            if cpu_monster.check_hp() != True:
+                break
+        if user_attack == '2':
+            print(f"\nYour monster used it's {user_monster.attack_2_name} attack!!")
+            cpu_monster.HP = user_monster.attack_2() + cpu_monster.HP
+            if cpu_monster.check_hp() != True:
+                break
+        if user_attack == '3':
+            print(f"\nYour monster used it's {user_monster.attack_3_name} attack!!")
+            cpu_monster.HP = user_monster.attack_3() + cpu_monster.HP
+            if cpu_monster.check_hp() != True:
+                break
+        if user_attack == '4':
+            print(f"\nYour monster used it's {user_monster.attack_4_name} attack!!")
+            cpu_monster.HP = user_monster.attack_4() + cpu_monster.HP
+            if cpu_monster.check_hp() != True:
+                break
+
+        sleep(3)
+        print(user_monster.HP)
+        print(cpu_monster.HP)
+
+        print("\nNow it's your opponent's turn....")
+        sleep(2)
+
+        possible_attacks = (cpu_monster.attack_1_name, cpu_monster.attack_2_name, cpu_monster.attack_3_name, cpu_monster.attack_4_name)
+        cpu_attack = choice(possible_attacks)
+
+        if cpu_attack == cpu_monster.attack_1_name:
+            print(f"\nYour opponent used it's {cpu_monster.attack_1_name} attack!")
+            user_monster.HP = cpu_monster.attack_1() + user_monster.HP
+            if user_monster.check_hp() != True:
+                break
+
+        if cpu_attack == cpu_monster.attack_2_name:
+            print(f"\nYour opponent used it's {cpu_monster.attack_2_name} attack!")
+            user_monster.HP = cpu_monster.attack_2() + user_monster.HP
+            if user_monster.check_hp() != True:
+                break
+
+        if cpu_attack == cpu_monster.attack_3_name:
+            print(f"\nYour opponent used it's {cpu_monster.attack_3_name} attack!")
+            user_monster.HP = cpu_monster.attack_3() + user_monster.HP
+            if user_monster.check_hp() != True:
+                break
+
+        if cpu_attack == cpu_monster.attack_4_name:
+            print(f"\nYour opponent used it's {cpu_monster.attack_4_name} attack!")
+            user_monster.HP = cpu_monster.attack_4() + user_monster.HP
+            if user_monster.check_hp() != True:
+                break
+
+        sleep(2)
+    sleep(2)
 
 monster_one = Monster_ONE()
 monster_two = Monster_TWO()
+monster_three = Monster_THREE()
 
 print("Welcome to Battle Monsters!")
 print("To begin, choose your monster!")
 
-print("\nType '1' for monster1")
-print("Type '2' for monster2")
-print("Type '3' for monster3")
+print(f"\nType '1' for {monster_one.name}")
+print(f"Type '2' for {monster_two.name}")
+print(f"Type '3' for {monster_three.name}")
 
-monsters_available = [monster_one, monster_two]
+monsters_available = [monster_one, monster_two, monster_three]
 user_monster = []
 while True:
     user_pick = input("Enter number: ")
     if user_pick == '1':
-        print("You have chosen monster1!")
+        monster_one.chosen_1()
         user_monster = monsters_available.pop(0)
+        sleep(2)
         break
     if user_pick == '2':
-        print("You have chosen monster2!")
+        monster_two.chosen_2()
         user_monster = monsters_available.pop(1)
+        sleep(2)
         break
     if user_pick == '3':
-        print("You have chosen monster3!")
+        monster_three.chosen_3()
+        user_monster = monsters_available.pop(2)
+        sleep(2)
         break
     else:
         print("Please type a valid number and hit enter.")
         sleep(2)
+    sleep(2)
 
-#sleep(3)
-# CPU picks it's monster.
 cpu_monster = choice(monsters_available)
 if cpu_monster == monster_one:
-    print("You will be battling monster1!")
+    print(f"\nYou will be battling against {monster_one.name}!")
 elif cpu_monster == monster_two:
-    print("You will be battling monster2!")
+    print(f"\nYou will be battling against {monster_two.name}!")
+elif cpu_monster == monster_three:
+    print(f"\nYou will be battling against {monster_three.name}!")
+sleep(2)
 
-print("Let the battle begin!")
+print("\nLet the battle begin!")
+sleep(2)
 print("First is your move.")
-user_hp = 100
-cpu_hp = 100
-while user_hp and cpu_hp > 0:
-    print("Choose your attack:")
-    user_attack = input("Type '1' for POWER FIST or '2' for SUPER KICK: ")
-    if user_attack == '1':
-        print("Your monster used it's POWER FIST attack!!")
-        cpu_hp -= 10
-    if user_attack == '2':
-        print("Your monster used it's SUPER KICK attack!!")
-        cpu_hp -= 15
 
-    print("Now it's your opponent's turn....")
-    sleep(2)
-    possible_attacks = ("POWER FIST", "HEADBUTT")
-    cpu_attack = choice(possible_attacks)
-    if cpu_attack == "POWER FIST":
-        print("Your opponent used it's POWER FIST attack")
-        user_hp -= 10
-    if cpu_attack == "HEADBUTT":
-        print("Your opponent used it's HEADBUTT attack")
-        user_hp -= 20
+simulate_battle()
 
-if user_hp <= 0:
-    print("You have been defeated.")
-
-if cpu_hp <= 0:
-    print("You have defeated your opponent!")
+print(user_monster.HP)
+print(cpu_monster.HP)
+if user_monster.HP <= 0:
+    print("YOU LOSE.")
+else:
+    print("YOU WIN!")
 
 
 
