@@ -35,5 +35,17 @@ In order to accomplish this goal, I will attempt to add additional effects and l
 on the individual attack techniques that the monsters have. My idea for additional effects include things like healing,
 poison damage, disabling, and fortification. As for new limitations, I'm going to try to add
 limits to the number of times an attack can be used within one battle. This will have an inverse relationship with 
-the amount of damage that each attack does.
+the amount of damage that each attack does. The new steps are as follows: 
 
+Step 1: Make a new file to store all attacks.
+
+Step 2: Make classes for the current attacks that are included in the game (possibly changing the name of some attacks)
+
+Step 3: Within each class, make methods that inflict damage on opponent. The amount of damage will be a random amount 
+within a specified range.
+
+Step 4: Within each class, make methods that track PP.
+
+Step 5: Within each class, make methods that add secondary effects to attacks.
+
+Step 6: Thorough testing to confirm if the game functions as designed.
