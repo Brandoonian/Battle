@@ -1,10 +1,20 @@
+from scratch import Scratch
+from screech import Screech
+from cold_cut import Cold_Cut
+from flashbang import Flashbang
+
+screech = Screech()
+scratch = Scratch()
+cold_cut = Cold_Cut()
+flashbang = Flashbang()
+
 class Monster_TWO:
-    """A class to manage monster2"""
+    """A class to manage monster3"""
 
     def __init__(self):
         """Initialize monster and it's attributes"""
         self.name = "UltraSteve"
-        self.HP = 101
+        self.HP = 99
         self.attack_1()
         self.attack_2()
         self.attack_3()
@@ -23,24 +33,40 @@ class Monster_TWO:
 
     def attack_1(self):
         """Characteristics of this attack."""
-        self.attack_1_name = "WEGDIE"
-        self.damage = -10
-        return self.damage
+        self.attack_1_name = scratch.name
+        damage = scratch.atk_damage()
+        return damage
+
+    def display_PP_1(self):
+        """Display PP for the move in attack_1 slot."""
+        return f"({scratch.PP + 1}/{scratch.start_PP})"
 
     def attack_2(self):
         """Characteristics of this attack."""
-        self.attack_2_name = "BUTTFUCK"
-        self.damage = -15
-        return self.damage
+        self.attack_2_name = screech.name
+        damage = screech.atk_damage()
+        return damage
+
+    def display_PP_2(self):
+        """Display PP for the move in attack_1 slot."""
+        return f"({screech.PP + 1}/{screech.start_PP})"
 
     def attack_3(self):
         """Characteristics of this attack."""
-        self.attack_3_name = "SCRATCH"
-        self.damage = -15
-        return self.damage
+        self.attack_3_name = cold_cut.name
+        damage = cold_cut.atk_damage()
+        return damage
+
+    def display_PP_3(self):
+        """Display PP for the move in attack_1 slot."""
+        return f"({cold_cut.PP + 1}/{cold_cut.start_PP})"
 
     def attack_4(self):
         """Characteristics of this attack."""
-        self.attack_4_name = "SCREECH"
-        self.damage = -15
-        return self.damage
+        self.attack_4_name = flashbang.name
+        damage = flashbang.atk_damage()
+        return damage
+
+    def display_PP_4(self):
+        """Display PP for the move in attack_1 slot."""
+        return f"({flashbang.PP + 1}/{flashbang.start_PP})"

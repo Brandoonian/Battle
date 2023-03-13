@@ -10,13 +10,14 @@ def simulate_battle():
         print(user_monster.HP)
         print(cpu_monster.HP)
         print("\nChoose your attack by entering the corresponding number:")
-        user_attack = input(f"1.{user_monster.attack_1_name}           2.{user_monster.attack_2_name}"
-                            f"\n3.{user_monster.attack_3_name}             4.{user_monster.attack_4_name}: ")
+        user_attack = input(f"1.{user_monster.attack_1_name} {user_monster.display_PP_1()}"
+                            f"     2.{user_monster.attack_2_name} {user_monster.display_PP_2()}"
+                            f"\n3.{user_monster.attack_3_name} {user_monster.display_PP_3()}"
+                            f"     4.{user_monster.attack_4_name} {user_monster.display_PP_4()}: ")
 
         if user_attack == '1':
             print(f"\nYour monster used it's {user_monster.attack_1_name} attack!!")
             cpu_monster.HP = user_monster.attack_1() + cpu_monster.HP
-
             if cpu_monster.check_hp() != True:
                 break
         if user_attack == '2':
@@ -78,7 +79,7 @@ monster_three = Monster_THREE()
 
 print("Welcome to Battle Monsters!")
 print("To begin, choose your monster!")
-
+print(monster_one.attack_1)
 print(f"\nType '1' for {monster_one.name}")
 print(f"Type '2' for {monster_two.name}")
 print(f"Type '3' for {monster_three.name}")
