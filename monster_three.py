@@ -1,4 +1,4 @@
-from belly_slam import Belly_Slam
+from all_attacks.belly_slam import Belly_Slam
 from rusty_hook import Rusty_Hook
 from stink_breath import Stink_Breath
 from brace import Brace
