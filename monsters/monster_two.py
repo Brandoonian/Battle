@@ -3,13 +3,14 @@ from screech import Screech
 from cold_cut import Cold_Cut
 from flashbang import Flashbang
 from random import randint
+from monsters.base_monster import BaseMonster
 
 screech = Screech()
 scratch = Scratch()
 cold_cut = Cold_Cut()
 flashbang = Flashbang()
 
-class Monster_TWO:
+class Monster_TWO(BaseMonster):
     """A class to manage monster3"""
 
     def __init__(self):
@@ -24,13 +25,6 @@ class Monster_TWO:
     def chosen_2(self):
         """Tells user they have chosen this monster."""
         print(f"\nYou have chosen {self.name}!")
-
-    def check_hp(self):
-        if self.HP <= 0.0:
-            print(f"{self.name} has been defeated.")
-            return False
-        else:
-            return True
 
     def attack_1(self):
         """Characteristics of this attack."""
