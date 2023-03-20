@@ -15,3 +15,6 @@ class Belly_Slam:
         else:
             print("No more PP left for this move!")
             return 0
+
+    def effect(self):
+        None

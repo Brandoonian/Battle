@@ -4,7 +4,7 @@ class Cold_Cut:
 
     def __init__(self):
         self.name ="COLD CUT"
-        self.start_PP = 1
+        self.start_PP = 3
         self.PP = self.start_PP
 
     def atk_damage(self):

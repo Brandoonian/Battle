@@ -1,7 +1,8 @@
-from all_attacks.belly_slam import Belly_Slam
+from belly_slam import Belly_Slam
 from rusty_hook import Rusty_Hook
 from stink_breath import Stink_Breath
 from brace import Brace
+from random import randint
 
 belly_slam = Belly_Slam()
 rusty_hook = Rusty_Hook()
@@ -14,7 +15,7 @@ class Monster_THREE:
     def __init__(self):
         """Initialize monster and it's attributes"""
         self.name = "AlphaChet"
-        self.HP = 102
+        self.HP = 102.0
         self.attack_1()
         self.attack_2()
         self.attack_3()
@@ -25,7 +26,7 @@ class Monster_THREE:
         print(f"\nYou have chosen {self.name}!")
 
     def check_hp(self):
-        if self.HP <= 0:
+        if self.HP <= 0.0:
             print(f"{self.name} has been defeated.")
             return False
         else:
@@ -37,6 +38,9 @@ class Monster_THREE:
         damage = belly_slam.atk_damage()
         return damage
 
+    def attack_1_effect(self):
+        return None
+
     def display_PP_1(self):
         """Display PP for the move in attack_1 slot."""
         return f"({belly_slam.PP + 1}/{belly_slam.start_PP})"
@@ -47,6 +51,9 @@ class Monster_THREE:
         damage = rusty_hook.atk_damage()
         return damage
 
+    def attack_2_effect(self):
+        return None
+
     def display_PP_2(self):
         """Display PP for the move in attack_1 slot."""
         return f"({rusty_hook.PP + 1}/{rusty_hook.start_PP})"
@@ -54,8 +61,18 @@ class Monster_THREE:
     def attack_3(self):
         """Characteristics of this attack."""
         self.attack_3_name = stink_breath.name
-        damage = stink_breath.atk_damage()
+        damage = stink_breath.atk_damage(damage=None)
         return damage
+
+    def attack_3_effect(self):
+        forward = {
+            "name": "poisoned",
+            "duration_set": False,
+            "duration": randint(3, 4),
+            "odds": 20,
+            "damage": randint(-4, -2),
+            "active": False}
+        return forward
 
     def display_PP_3(self):
         """Display PP for the move in attack_1 slot."""
@@ -66,6 +83,13 @@ class Monster_THREE:
         self.attack_4_name = brace.name
         damage = brace.atk_damage()
         return damage
+
+    def attack_4_effect(self):
+        forward = {
+            "name": "defense rose",
+            "defense": (90/100),
+            "active": False}
+        return forward
 
     def display_PP_4(self):
         """Display PP for the move in attack_1 slot."""

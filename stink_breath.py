@@ -7,7 +7,7 @@ class Stink_Breath:
         self.start_PP = 4
         self.PP = self.start_PP
 
-    def atk_damage(self):
+    def atk_damage(self, damage):
         self.damage = randint(-10, -5)
         if self.PP >= 0:
             self.PP -= 1
@@ -15,3 +15,9 @@ class Stink_Breath:
         else:
             print("No more PP left for this move!")
             return 0
+
+
+
+
+
+

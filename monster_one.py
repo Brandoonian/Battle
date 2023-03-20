@@ -2,6 +2,8 @@ from power_fist import Power_Fist
 from super_kick import Super_Kick
 from nut_punch import Nut_Punch
 from steel_toe import Steel_Toe
+from random import randint
+
 
 power_fist = Power_Fist()
 super_kick = Super_Kick()
@@ -14,7 +16,7 @@ class Monster_ONE:
     def __init__(self):
         """Initialize monster and it's attributes"""
         self.name = "GigaBob"
-        self.HP = 99
+        self.HP = 99.0
         self.attack_1()
         self.attack_2()
         self.attack_3()
@@ -25,7 +27,7 @@ class Monster_ONE:
         print(f"\nYou have chosen {self.name}!")
 
     def check_hp(self):
-        if self.HP <= 0:
+        if self.HP <= 0.0:
             print(f"{self.name} has been defeated.")
             return False
         else:
@@ -37,6 +39,9 @@ class Monster_ONE:
         damage = power_fist.atk_damage()
         return damage
 
+    def attack_1_effect(self):
+        return None
+
     def display_PP_1(self):
         """Display PP for the move in attack_1 slot."""
         return f"({power_fist.PP + 1}/{power_fist.start_PP})"
@@ -46,6 +51,9 @@ class Monster_ONE:
         self.attack_2_name = super_kick.name
         damage = super_kick.atk_damage()
         return damage
+
+    def attack_2_effect(self):
+        return None
 
     def display_PP_2(self):
         """Display PP for the move in attack_1 slot."""
@@ -57,6 +65,16 @@ class Monster_ONE:
         damage = nut_punch.atk_damage()
         return damage
 
+    def attack_3_effect(self):
+        forward = {
+            "name": "paralyzed",
+            "duration_set": False,
+            "duration": randint(1, 2),
+            "odds": 20,
+            "damage": 0,
+            "active": False}
+        return forward
+
     def display_PP_3(self):
         """Display PP for the move in attack_1 slot."""
         return f"({nut_punch.PP + 1}/{nut_punch.start_PP})"
@@ -66,6 +84,9 @@ class Monster_ONE:
         self.attack_4_name = steel_toe.name
         damage = steel_toe.atk_damage()
         return damage
+
+    def attack_4_effect(self):
+        return None
 
     def display_PP_4(self):
         """Display PP for the move in attack_1 slot."""
