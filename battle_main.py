@@ -1,8 +1,8 @@
 from time import sleep
 from random import choice, randint
-from monster_one import Monster_ONE
-from monster_two import Monster_TWO
-from monster_three import Monster_THREE
+from monsters.monster_one import Monster_ONE
+from monsters.monster_two import Monster_TWO
+from monsters.monster_three import Monster_THREE
 
 active_effects = []
 active_fortify = []
@@ -180,7 +180,6 @@ def apply_fortify():
     for fortify in active_fortify:
         if fortify['name'] == "defense rose" and fortify['active'] == True:
            return fortify['defense']
-
 
 def set_duration():
     for effects in active_effects:

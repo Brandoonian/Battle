@@ -3,13 +3,14 @@ from rusty_hook import Rusty_Hook
 from stink_breath import Stink_Breath
 from brace import Brace
 from random import randint
+from monsters.base_monster import BaseMonster
 
 belly_slam = Belly_Slam()
 rusty_hook = Rusty_Hook()
 stink_breath = Stink_Breath()
 brace = Brace()
 
-class Monster_THREE:
+class Monster_THREE(BaseMonster):
     """A class to manage monster3"""
 
     def __init__(self):
@@ -24,13 +25,6 @@ class Monster_THREE:
     def chosen_3(self):
         """Tells user they have chosen this monster."""
         print(f"\nYou have chosen {self.name}!")
-
-    def check_hp(self):
-        if self.HP <= 0.0:
-            print(f"{self.name} has been defeated.")
-            return False
-        else:
-            return True
 
     def attack_1(self):
         """Characteristics of this attack."""
@@ -50,9 +44,6 @@ class Monster_THREE:
         self.attack_2_name = rusty_hook.name
         damage = rusty_hook.atk_damage()
         return damage
-
-    def attack_2_effect(self):
-        return None
 
     def display_PP_2(self):
         """Display PP for the move in attack_1 slot."""

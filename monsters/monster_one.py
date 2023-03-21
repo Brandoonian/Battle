@@ -3,14 +3,14 @@ from super_kick import Super_Kick
 from nut_punch import Nut_Punch
 from steel_toe import Steel_Toe
 from random import randint
-
+from monsters.base_monster import BaseMonster
 
 power_fist = Power_Fist()
 super_kick = Super_Kick()
 nut_punch = Nut_Punch()
 steel_toe = Steel_Toe()
 
-class Monster_ONE:
+class Monster_ONE(BaseMonster):
     """A class to manage monter1"""
 
     def __init__(self):
@@ -25,13 +25,6 @@ class Monster_ONE:
     def chosen_1(self):
         """Tells user they have chosen this monster."""
         print(f"\nYou have chosen {self.name}!")
-
-    def check_hp(self):
-        if self.HP <= 0.0:
-            print(f"{self.name} has been defeated.")
-            return False
-        else:
-            return True
 
     def attack_1(self):
         """Characteristics of this attack."""
