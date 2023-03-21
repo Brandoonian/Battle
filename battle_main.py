@@ -113,7 +113,7 @@ def get_user_attack():
     if user_attack == '1':
         print(f"\nYour monster used it's {user_monster.attack_1_name} attack!!")
         cpu_monster.HP = user_monster.attack_1() + cpu_monster.HP
-        
+
 
     if user_attack == '2':
         print(f"\nYour monster used it's {user_monster.attack_2_name} attack!!")
