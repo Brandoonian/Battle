@@ -17,23 +17,17 @@ class Monster_ONE(BaseMonster):
         """Initialize monster and it's attributes"""
         self.name = "GigaBob"
         self.HP = 99.0
+        self.accuracy = 99.0
         self.attack_1()
         self.attack_2()
         self.attack_3()
         self.attack_4()
-
-    def chosen_1(self):
-        """Tells user they have chosen this monster."""
-        print(f"\nYou have chosen {self.name}!")
 
     def attack_1(self):
         """Characteristics of this attack."""
         self.attack_1_name = power_fist.name
         damage = power_fist.atk_damage()
         return damage
-
-    def attack_1_effect(self):
-        return None
 
     def display_PP_1(self):
         """Display PP for the move in attack_1 slot."""
@@ -44,9 +38,6 @@ class Monster_ONE(BaseMonster):
         self.attack_2_name = super_kick.name
         damage = super_kick.atk_damage()
         return damage
-
-    def attack_2_effect(self):
-        return None
 
     def display_PP_2(self):
         """Display PP for the move in attack_1 slot."""
@@ -77,9 +68,6 @@ class Monster_ONE(BaseMonster):
         self.attack_4_name = steel_toe.name
         damage = steel_toe.atk_damage()
         return damage
-
-    def attack_4_effect(self):
-        return None
 
     def display_PP_4(self):
         """Display PP for the move in attack_1 slot."""

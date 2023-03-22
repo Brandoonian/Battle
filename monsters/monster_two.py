@@ -17,23 +17,17 @@ class Monster_TWO(BaseMonster):
         """Initialize monster and it's attributes"""
         self.name = "UltraSteve"
         self.HP = 99.0
+        self.accuracy = 97.0
         self.attack_1()
         self.attack_2()
         self.attack_3()
         self.attack_4()
-
-    def chosen_2(self):
-        """Tells user they have chosen this monster."""
-        print(f"\nYou have chosen {self.name}!")
 
     def attack_1(self):
         """Characteristics of this attack."""
         self.attack_1_name = scratch.name
         damage = scratch.atk_damage()
         return damage
-
-    def attack_1_effect(self):
-        return None
 
     def display_PP_1(self):
         """Display PP for the move in attack_1 slot."""
@@ -85,7 +79,11 @@ class Monster_TWO(BaseMonster):
         return damage
 
     def attack_4_effect(self):
-        return None
+        forward = {
+            "name": "blinded",
+            "blinding": (90/100),
+            "active": False}
+        return forward
 
     def display_PP_4(self):
         """Display PP for the move in attack_1 slot."""
