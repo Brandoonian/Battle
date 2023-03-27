@@ -4,8 +4,11 @@ class Scratch:
 
     def __init__(self):
         self.name ="SCRATCH"
+
         self.start_PP = 3
         self.PP = self.start_PP
+
+        self.move_acc = 89.85
 
     def atk_damage(self):
         self.damage = randint(-15, -10)

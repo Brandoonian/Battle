@@ -2,7 +2,6 @@ from belly_slam import Belly_Slam
 from rusty_hook import Rusty_Hook
 from stink_breath import Stink_Breath
 from brace import Brace
-from random import randint
 from monsters.base_monster import BaseMonster
 
 belly_slam = Belly_Slam()
@@ -17,7 +16,8 @@ class Monster_THREE(BaseMonster):
         """Initialize monster and it's attributes"""
         self.name = "AlphaChet"
         self.HP = 102.0
-        self.accuracy = 98
+        self.accuracy = 95.0
+        self.evasion = 0.95
         self.attack_1()
         self.attack_2()
         self.attack_3()
@@ -29,6 +29,10 @@ class Monster_THREE(BaseMonster):
         damage = belly_slam.atk_damage()
         return damage
 
+    def attack_1_acc(self):
+        forward = belly_slam.move_acc
+        return forward
+
     def display_PP_1(self):
         """Display PP for the move in attack_1 slot."""
         return f"({belly_slam.PP + 1}/{belly_slam.start_PP})"
@@ -38,6 +42,10 @@ class Monster_THREE(BaseMonster):
         self.attack_2_name = rusty_hook.name
         damage = rusty_hook.atk_damage()
         return damage
+
+    def attack_2_acc(self):
+        forward = rusty_hook.move_acc
+        return forward
 
     def display_PP_2(self):
         """Display PP for the move in attack_1 slot."""
@@ -50,13 +58,11 @@ class Monster_THREE(BaseMonster):
         return damage
 
     def attack_3_effect(self):
-        forward = {
-            "name": "poisoned",
-            "duration_set": False,
-            "duration": randint(3, 4),
-            "odds": 20,
-            "damage": randint(-4, -2),
-            "active": False}
+        forward = stink_breath.atk_effect()
+        return forward
+
+    def attack_3_acc(self):
+        forward = stink_breath.move_acc
         return forward
 
     def display_PP_3(self):
@@ -70,10 +76,11 @@ class Monster_THREE(BaseMonster):
         return damage
 
     def attack_4_effect(self):
-        forward = {
-            "name": "defense rose",
-            "defense": (90/100),
-            "active": False}
+        forward = brace.atk_effect()
+        return forward
+
+    def attack_4_acc(self):
+        forward = brace.move_acc
         return forward
 
     def display_PP_4(self):

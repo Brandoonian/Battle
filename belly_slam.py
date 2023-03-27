@@ -4,8 +4,11 @@ class Belly_Slam:
 
     def __init__(self):
         self.name ="BELLY SLAM"
+
         self.start_PP = 1
         self.PP = self.start_PP
+
+        self.move_acc = 78.13
 
     def atk_damage(self):
         self.damage = randint(-25, -20)

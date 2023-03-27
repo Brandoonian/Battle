@@ -17,7 +17,8 @@ class Monster_TWO(BaseMonster):
         """Initialize monster and it's attributes"""
         self.name = "UltraSteve"
         self.HP = 99.0
-        self.accuracy = 97.0
+        self.accuracy = 93.0
+        self.evasion = 0.89
         self.attack_1()
         self.attack_2()
         self.attack_3()
@@ -29,6 +30,10 @@ class Monster_TWO(BaseMonster):
         damage = scratch.atk_damage()
         return damage
 
+    def attack_1_acc(self):
+        forward = scratch.move_acc
+        return forward
+
     def display_PP_1(self):
         """Display PP for the move in attack_1 slot."""
         return f"({scratch.PP + 1}/{scratch.start_PP})"
@@ -38,14 +43,13 @@ class Monster_TWO(BaseMonster):
         self.attack_2_name = screech.name
         damage = screech.atk_damage()
         return damage
+
     def attack_2_effect(self):
-        forward = {
-            "name": "confused",
-            "duration_set": False,
-            "duration": randint(2, 4),
-            "odds": 20,
-            "damage": randint(-5, -3),
-            "active": False}
+        forward = screech.atk_effect()
+        return forward
+
+    def attack_2_acc(self):
+        forward = screech.move_acc
         return forward
 
     def display_PP_2(self):
@@ -59,13 +63,11 @@ class Monster_TWO(BaseMonster):
         return damage
 
     def attack_3_effect(self):
-        forward = {
-            "name": "frozen",
-            "duration_set": False,
-            "duration": randint(2, 4),
-            "odds": 20,
-            "damage": randint(-5, -3),
-            "active": False}
+        forward = cold_cut.atk_effect()
+        return forward
+
+    def attack_3_acc(self):
+        forward = cold_cut.move_acc
         return forward
 
     def display_PP_3(self):
@@ -79,12 +81,16 @@ class Monster_TWO(BaseMonster):
         return damage
 
     def attack_4_effect(self):
-        forward = {
-            "name": "blinded",
-            "blinding": (90/100),
-            "active": False}
+        forward = flashbang.atk_effect()
+        return forward
+
+    def attack_4_acc(self):
+        forward = flashbang.move_acc
         return forward
 
     def display_PP_4(self):
         """Display PP for the move in attack_1 slot."""
-        return f"({flashbang.PP + 1}/{flashbang.start_PP})"
+        if flashbang.PP <= -1:
+            return f"(0/{flashbang.start_PP})"
+        else:
+            return f"({flashbang.PP + 1}/{flashbang.start_PP})"

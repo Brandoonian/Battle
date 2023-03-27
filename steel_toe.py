@@ -4,8 +4,11 @@ class Steel_Toe:
 
     def __init__(self):
         self.name ="STEEL TOE"
+
         self.start_PP = 2
         self.PP = self.start_PP
+
+        self.move_acc = 85.94
 
     def atk_damage(self):
         self.damage = randint(-15, -10)

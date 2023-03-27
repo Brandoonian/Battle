@@ -2,8 +2,11 @@ class Brace:
     """A basic attack."""
     def __init__(self):
         self.name ="BRACE"
+
         self.start_PP = 4
         self.PP = self.start_PP
+
+        self.move_acc = 25500.0
 
     def atk_damage(self):
         self.damage = 0
@@ -13,3 +16,13 @@ class Brace:
         else:
             print("No more PP left for this move!")
             return 0
+
+    def atk_effect(self):
+        self.dict = {
+            "name": "defense rose",
+            "defense": (90/100),
+            "active": False}
+        if self.PP >= 0:
+            return self.dict
+        else:
+            return None

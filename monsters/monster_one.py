@@ -2,7 +2,7 @@ from power_fist import Power_Fist
 from super_kick import Super_Kick
 from nut_punch import Nut_Punch
 from steel_toe import Steel_Toe
-from random import randint
+
 from monsters.base_monster import BaseMonster
 
 power_fist = Power_Fist()
@@ -17,7 +17,8 @@ class Monster_ONE(BaseMonster):
         """Initialize monster and it's attributes"""
         self.name = "GigaBob"
         self.HP = 99.0
-        self.accuracy = 99.0
+        self.accuracy = 97.0
+        self.evasion = 0.91
         self.attack_1()
         self.attack_2()
         self.attack_3()
@@ -29,6 +30,10 @@ class Monster_ONE(BaseMonster):
         damage = power_fist.atk_damage()
         return damage
 
+    def attack_1_acc(self):
+        forward = power_fist.move_acc
+        return forward
+
     def display_PP_1(self):
         """Display PP for the move in attack_1 slot."""
         return f"({power_fist.PP + 1}/{power_fist.start_PP})"
@@ -38,6 +43,10 @@ class Monster_ONE(BaseMonster):
         self.attack_2_name = super_kick.name
         damage = super_kick.atk_damage()
         return damage
+
+    def attack_2_acc(self):
+        forward = super_kick.move_acc
+        return forward
 
     def display_PP_2(self):
         """Display PP for the move in attack_1 slot."""
@@ -50,13 +59,11 @@ class Monster_ONE(BaseMonster):
         return damage
 
     def attack_3_effect(self):
-        forward = {
-            "name": "paralyzed",
-            "duration_set": False,
-            "duration": randint(1, 2),
-            "odds": 20,
-            "damage": 0,
-            "active": False}
+        forward = nut_punch.atk_effect()
+        return forward
+
+    def attack_3_acc(self):
+        forward = nut_punch.move_acc
         return forward
 
     def display_PP_3(self):
@@ -68,6 +75,10 @@ class Monster_ONE(BaseMonster):
         self.attack_4_name = steel_toe.name
         damage = steel_toe.atk_damage()
         return damage
+
+    def attack_4_acc(self):
+        forward = steel_toe.move_acc
+        return forward
 
     def display_PP_4(self):
         """Display PP for the move in attack_1 slot."""

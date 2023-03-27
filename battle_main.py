@@ -47,6 +47,22 @@ def simulate_battle():
         apply_poison()
     sleep(2)
 
+def adjust_acc(monster_acc, move_acc, opp_evasion):
+    acc_modified = monster_acc * move_acc * opp_evasion
+    return acc_modified
+
+def hit_or_miss(adjust_acc):
+    if adjust_acc >= 10000.0:
+        return True
+    else:
+        odds = randint(1, 10000)
+        print(f"Hit{odds}")
+        if adjust_acc >= odds:
+            return True
+        else:
+            return False
+
+
 def get_user_attack():
     user_attack = input(f"1.{user_monster.attack_1_name} {user_monster.display_PP_1()}"
                         f"     2.{user_monster.attack_2_name} {user_monster.display_PP_2()}"
@@ -55,12 +71,18 @@ def get_user_attack():
 
     if user_attack == '1':
         print(f"\nYour monster used it's {user_monster.attack_1_name} attack!!")
-        hit = randint(1, 100)
-        print(hit)
-        if hit <= user_monster.accuracy:
+        turn_acc = adjust_acc(user_monster.accuracy, user_monster.attack_1_acc(), cpu_monster.evasion)
+        print(turn_acc)
+        hit = hit_or_miss(turn_acc)
+        if hit == True:
             cpu_monster.HP = user_monster.attack_1() + cpu_monster.HP
             if user_monster.attack_1_effect() != None:
-                if active_poison or active_paralyze or active_freeze or active_confuse:
+                if user_monster.attack_1_effect()['name'] == "blinded":
+                    active_blind.append(user_monster.attack_1_effect())
+                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
+                    print(f"{cpu_monster.name}'s accuracy fell!")
+                    print(f"accuracy: {cpu_monster.accuracy}")
+                elif active_poison or active_paralyze or active_freeze or active_confuse:
                     for effects in active_poison:
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                     for effects in active_paralyze:
@@ -71,11 +93,6 @@ def get_user_attack():
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                 elif user_monster.attack_1_effect()['name'] == "defense rose":
                     active_defense.append(user_monster.attack_1_effect())
-                elif user_monster.attack_1_effect()['name'] == "blinded":
-                    active_blind.append(user_monster.attack_1_effect())
-                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
-                    print(f"{cpu_monster.name}'s accuracy fell!")
-                    print(cpu_monster.accuracy)
                 else:
                     if user_monster.attack_1_effect()['name'] == "poisoned":
                         active_poison.append(user_monster.attack_1_effect())
@@ -87,15 +104,22 @@ def get_user_attack():
                         active_confuse.append(user_monster.attack_1_effect())
         else:
             print("The attack missed!")
+            user_monster.attack_1()
 
     if user_attack == '2':
         print(f"\nYour monster used it's {user_monster.attack_2_name} attack!!")
-        hit = randint(1, 100)
-        print(hit)
-        if hit <= user_monster.accuracy:
+        turn_acc = adjust_acc(user_monster.accuracy, user_monster.attack_2_acc(), cpu_monster.evasion)
+        hit = hit_or_miss(turn_acc)
+        print(turn_acc)
+        if hit == True:
             cpu_monster.HP = user_monster.attack_2() + cpu_monster.HP
             if user_monster.attack_2_effect() != None:
-                if active_poison or active_paralyze or active_freeze or active_confuse:
+                if user_monster.attack_2_effect()['name'] == "blinded":
+                    active_blind.append(user_monster.attack_2_effect())
+                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
+                    print(f"{cpu_monster.name}'s accuracy fell!")
+                    print(f"accuracy: {cpu_monster.accuracy}")
+                elif active_poison or active_paralyze or active_freeze or active_confuse:
                     for effects in active_poison:
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                     for effects in active_paralyze:
@@ -106,11 +130,6 @@ def get_user_attack():
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                 elif user_monster.attack_2_effect()['name'] == "defense rose":
                     active_defense.append(user_monster.attack_2_effect())
-                elif user_monster.attack_2_effect()['name'] == "blinded":
-                    active_blind.append(user_monster.attack_2_effect())
-                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
-                    print(f"{cpu_monster.name}'s accuracy fell!")
-                    print(cpu_monster.accuracy)
                 else:
                     if user_monster.attack_2_effect()['name'] == "poisoned":
                         active_poison.append(user_monster.attack_2_effect())
@@ -122,16 +141,23 @@ def get_user_attack():
                         active_confuse.append(user_monster.attack_2_effect())
         else:
             print("The attack missed!")
+            user_monster.attack_2()
 
         print(active_confuse)
     if user_attack == '3':
         print(f"\nYour monster used it's {user_monster.attack_3_name} attack!!")
-        hit = randint(1, 100)
-        print(hit)
-        if hit <= user_monster.accuracy:
+        turn_acc = adjust_acc(user_monster.accuracy, user_monster.attack_3_acc(), cpu_monster.evasion)
+        hit = hit_or_miss(turn_acc)
+        print(turn_acc)
+        if hit == True:
             cpu_monster.HP = user_monster.attack_3() + cpu_monster.HP
             if user_monster.attack_3_effect() != None:
-                if active_poison or active_paralyze or active_freeze or active_confuse:
+                if user_monster.attack_3_effect()['name'] == "blinded":
+                    active_blind.append(user_monster.attack_3_effect())
+                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
+                    print(f"{cpu_monster.name}'s accuracy fell!")
+                    print(f"accuracy: {cpu_monster.accuracy}")
+                elif active_poison or active_paralyze or active_freeze or active_confuse:
                     for effects in active_poison:
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                     for effects in active_paralyze:
@@ -142,11 +168,6 @@ def get_user_attack():
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                 elif user_monster.attack_3_effect()['name'] == "defense rose":
                     active_defense.append(user_monster.attack_3_effect())
-                elif user_monster.attack_3_effect()['name'] == "blinded":
-                    active_blind.append(user_monster.attack_3_effect())
-                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
-                    print(f"{cpu_monster.name}'s accuracy fell!")
-                    print(cpu_monster.accuracy)
                 else:
                     if user_monster.attack_3_effect()['name'] == "poisoned":
                         active_poison.append(user_monster.attack_3_effect())
@@ -158,15 +179,22 @@ def get_user_attack():
                         active_confuse.append(user_monster.attack_3_effect())
         else:
             print("The attack missed!")
+            user_monster.attack_3()
 
     if user_attack == '4':
         print(f"\nYour monster used it's {user_monster.attack_4_name} attack!!")
-        hit = randint(1, 100)
-        print(hit)
-        if hit <= user_monster.accuracy:
+        turn_acc = adjust_acc(user_monster.accuracy, user_monster.attack_4_acc(), cpu_monster.evasion)
+        print(turn_acc)
+        hit = hit_or_miss(turn_acc)
+        if hit == True:
             cpu_monster.HP = user_monster.attack_4() + cpu_monster.HP
             if user_monster.attack_4_effect() != None:
-                if active_poison or active_paralyze or active_freeze or active_confuse:
+                if user_monster.attack_4_effect()['name'] == "blinded":
+                    active_blind.append(user_monster.attack_4_effect())
+                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
+                    print(f"{cpu_monster.name}'s accuracy fell!")
+                    print(f"accuracy: {cpu_monster.accuracy}")
+                elif active_poison or active_paralyze or active_freeze or active_confuse:
                     for effects in active_poison:
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                     for effects in active_paralyze:
@@ -177,11 +205,6 @@ def get_user_attack():
                         print(f"{cpu_monster.name} took damage but is already {effects['name']}!")
                 elif user_monster.attack_4_effect()['name'] == "defense rose":
                     active_defense.append(user_monster.attack_4_effect())
-                elif user_monster.attack_4_effect()['name'] == "blinded":
-                    active_blind.append(user_monster.attack_4_effect())
-                    cpu_monster.accuracy = cpu_monster.accuracy * apply_blinding()
-                    print(f"{cpu_monster.name}'s accuracy fell!")
-                    print(cpu_monster.accuracy)
                 else:
                     if user_monster.attack_4_effect()['name'] == "poisoned":
                         active_poison.append(user_monster.attack_4_effect())
@@ -193,6 +216,7 @@ def get_user_attack():
                         active_confuse.append(user_monster.attack_4_effect())
         else:
             print("The attack missed!")
+            user_monster.attack_4()
 
     sleep(3)
 
@@ -204,64 +228,72 @@ def get_cpu_attack():
     cpu_attack = choice(possible_attacks)
 
     if cpu_attack == cpu_monster.attack_1_name:
-        hit = randint(1, 100)
-        if hit <= cpu_monster.accuracy:
+        print(f"\nYour opponent used it's {cpu_monster.attack_1_name} attack!")
+        turn_acc = adjust_acc(cpu_monster.accuracy, cpu_monster.attack_1_acc(), user_monster.evasion)
+        print(turn_acc)
+        hit = hit_or_miss(turn_acc)
+        if hit == True:
             if active_defense:
-                print(f"\nYour opponent used it's {cpu_monster.attack_1_name} attack!")
                 user_monster.HP = (float(cpu_monster.attack_1()) * apply_defense()) + float(user_monster.HP)
             elif active_confuse and hurt_self() == True:
                 print(f"{cpu_monster.name} hurt itself in confusion!")
                 cpu_monster.HP = float(cpu_monster.attack_1()) + float(cpu_monster.HP)
             else:
-                print(f"\nYour opponent used it's {cpu_monster.attack_1_name} attack!")
                 user_monster.HP = float(cpu_monster.attack_1()) + float(user_monster.HP)
         else:
             print("The attack missed!")
+            cpu_monster.attack_1()
 
     if cpu_attack == cpu_monster.attack_2_name:
-        hit = randint(1, 100)
-        if hit <= cpu_monster.accuracy:
+        print(f"\nYour opponent used it's {cpu_monster.attack_2_name} attack!")
+        turn_acc = adjust_acc(cpu_monster.accuracy, cpu_monster.attack_2_acc(), user_monster.evasion)
+        print(turn_acc)
+        hit = hit_or_miss(turn_acc)
+        if hit == True:
             if active_defense:
-                print(f"\nYour opponent used it's {cpu_monster.attack_2_name} attack!")
                 user_monster.HP = (float(cpu_monster.attack_2()) * apply_defense()) + float(user_monster.HP)
             elif active_confuse and hurt_self() == True:
                 print(f"{cpu_monster.name} hurt itself in confusion!")
                 cpu_monster.HP = float(cpu_monster.attack_2()) + float(cpu_monster.HP)
             else:
-                print(f"\nYour opponent used it's {cpu_monster.attack_2_name} attack!")
                 user_monster.HP = float(cpu_monster.attack_2()) + float(user_monster.HP)
         else:
             print("The attack missed!")
+            cpu_monster.attack_2()
 
     if cpu_attack == cpu_monster.attack_3_name:
-        hit = randint(1, 100)
-        if hit <= cpu_monster.accuracy:
+        print(f"\nYour opponent used it's {cpu_monster.attack_3_name} attack!")
+        turn_acc = adjust_acc(cpu_monster.accuracy, cpu_monster.attack_3_acc(), user_monster.evasion)
+        print(turn_acc)
+        hit = hit_or_miss(turn_acc)
+        if hit == True:
             if active_defense:
-                print(f"\nYour opponent used it's {cpu_monster.attack_3_name} attack!")
                 user_monster.HP = (float(cpu_monster.attack_3()) * apply_defense()) + float(user_monster.HP)
             elif active_confuse and hurt_self() == True:
                 print(f"{cpu_monster.name} hurt itself in confusion!")
                 cpu_monster.HP = float(cpu_monster.attack_3()) + float(cpu_monster.HP)
             else:
-                print(f"\nYour opponent used it's {cpu_monster.attack_3_name} attack!")
                 user_monster.HP = float(cpu_monster.attack_3()) + float(user_monster.HP)
         else:
             print("The attack missed!")
+            cpu_monster.attack_3()
 
     if cpu_attack == cpu_monster.attack_4_name:
-        hit = randint(1, 100)
-        if hit <= cpu_monster.accuracy:
+        print(f"\nYour opponent used it's {cpu_monster.attack_4_name} attack!")
+        turn_acc = adjust_acc(cpu_monster.accuracy, cpu_monster.attack_4_acc(), user_monster.evasion)
+        print(turn_acc)
+        hit = hit_or_miss(turn_acc)
+        if hit == True:
             if active_defense:
-                print(f"\nYour opponent used it's {cpu_monster.attack_4_name} attack!")
                 user_monster.HP = (float(cpu_monster.attack_4()) * apply_defense()) + float(user_monster.HP)
             elif active_confuse and hurt_self() == True:
                 print(f"{cpu_monster.name} hurt itself in confusion!")
                 cpu_monster.HP = float(cpu_monster.attack_4()) + float(cpu_monster.HP)
             else:
-                print(f"\nYour opponent used it's {cpu_monster.attack_4_name} attack!")
                 user_monster.HP = float(cpu_monster.attack_4()) + float(user_monster.HP)
         else:
             print("The attack missed!")
+            cpu_monster.attack_4()
 
 def check_poison():
     for effects in active_poison:
@@ -369,9 +401,9 @@ def apply_paralyze():
                     print(user_monster.HP)
                     print(cpu_monster.HP)
                 print(f"{cpu_monster.name} is no longer paralyzed.")
-            elif duration <= len(turns_effected):
                 active_paralyze.clear()
                 turns_effected.clear()
+            elif duration <= len(turns_effected):
                 for effects in active_paralyze:
                     effects['active'] = False
                     effects['set_duration'] = False
@@ -427,13 +459,13 @@ def hurt_self():
                 return False
 
 def apply_defense():
-    for defense in active_defense:
-        dam_resist = defense['defense'] ** len(active_defense)
-        return dam_resist
+    # for defense in active_defense:
+        dam_resist = active_defense[0]['defense'] ** len(active_defense)
+        return dam_resist  
 
 def apply_blinding():
     for effect in active_blind:
-        acc_damage = effect['blinding'] ** len(active_blind)
+        acc_damage = effect['blinding']
         return acc_damage
 
 monster_one = Monster_ONE()

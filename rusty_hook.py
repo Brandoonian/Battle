@@ -4,8 +4,11 @@ class Rusty_Hook:
 
     def __init__(self):
         self.name ="RUSTY HOOK"
+
         self.start_PP = 3
         self.PP = self.start_PP
+
+        self.move_acc = 80.47
 
     def atk_damage(self):
         self.damage = randint(-20, -15)
